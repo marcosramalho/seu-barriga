@@ -1,6 +1,11 @@
 const app = require('express')();
 
 const consign = require('consign');
+const knex = require('knex');
+const knexfile = require('../knexfile');
+
+// TODO criar chaveamento dinâmico
+app.db = knex(knexfile.test);
 
 consign({ cwd: 'src', verbose: false })
   .include('./config/middleware.js')
