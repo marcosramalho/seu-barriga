@@ -24,6 +24,18 @@ test('Deve inserir uma conta com sucesso', () => {
     });
 });
 
+test('Nao deve inserir uma conta sem nome', () => {
+  return request(app)
+    .post(MAIN_ROUTE)
+    .send({ user_id: user.id })
+    .then((result) => {
+      expect(result.status).toBe(400);
+      expect(result.body.error).toBe('Nome é um atributo obrigatório');
+    });
+});
+
+test.skip('Nao deve inserir uma conta de nome duplicado para o mesmo usuário', () => {});
+
 test('Deve listar todas as contas', () => {
   return app
     .db('accounts')
@@ -34,6 +46,8 @@ test('Deve listar todas as contas', () => {
       expect(res.body.length).toBeGreaterThan(0);
     });
 });
+
+test.skip('Deve listar apenas as contas do usuario', () => {});
 
 test('Deve retornar uma conta por ID', () => {
   return app
@@ -46,6 +60,8 @@ test('Deve retornar uma conta por ID', () => {
       expect(res.body.user_id).toBe(user.id);
     });
 });
+
+test.skip('Nao deve retornar uma conta de outro usuario', () => {});
 
 test('Deve alterar uma conta', () => {
   return app
@@ -62,6 +78,8 @@ test('Deve alterar uma conta', () => {
     });
 });
 
+test.skip('Nao deve alterar conta de outro usuario', () => {});
+
 test('Deve remover uma conta', () => {
   return app
     .db('accounts')
@@ -71,3 +89,5 @@ test('Deve remover uma conta', () => {
       expect(res.status).toBe(204);
     });
 });
+
+test.skip('Nao deve remover conta de outro usuario', () => {});
