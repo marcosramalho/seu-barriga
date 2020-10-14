@@ -5,5 +5,11 @@ module.exports = (app) => {
     });
   };
 
-  return { create };
+  const findAll = (req, res) => {
+    app.services.accounts
+      .findAll()
+      .then((result) => res.status(200).json(result));
+  };
+
+  return { create, findAll };
 };
