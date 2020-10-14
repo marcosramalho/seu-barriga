@@ -15,10 +15,15 @@ module.exports = (app) => {
     return app.db('accounts').where({ id }).update(account, '*');
   };
 
+  const remove = (id) => {
+    return app.db('accounts').where({ id }).del();
+  };
+
   return {
     save,
     findAll,
     findOne,
     update,
+    remove,
   };
 };
